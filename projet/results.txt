@@ -1,1 +1,27 @@
+=== 1. Calcul des fréquences théoriques ===
+Note C  (-9) : 261.625565 Hz
+Note C# (-8) : 277.182631 Hz
+Note D  (-7) : 293.664768 Hz
+Note D# (-6) : 311.126984 Hz
+Note E  (-5) : 329.627557 Hz
+Note F  (-4) : 349.228231 Hz
+Note F# (-3) : 369.994423 Hz
+Note G  (-2) : 391.995436 Hz
+Note G# (-1) : 415.304698 Hz
+Note A  (+0) : 440.000000 Hz
+Note A# (+1) : 466.163762 Hz
+Note B  (+2) : 493.883301 Hz
+
+=== 2. Test d'interpolation linéaire (Modèle simpliste) ===
+Modèle : f(n) = 21.1143 * n + 451.6546
+Vraie fréquence du La4 : 440.000000 Hz
+Fréquence interpolée   : 451.654622 Hz
+Erreur absolue         : 11.654622 Hz
+Erreur relative        : 2.6488%
+
+=== 3. Accumulation d'erreurs flottantes (Le test de l'octave) ===
+Résultat après 12 multiplications flottantes : 880.000000000000341
+Valeur théorique exacte                      : 880.000000000000000
+Différence (Erreur machine)                  : 3.410605131648481e-13
+>>> CONCLUSION : Les flottants ne sont pas exacts. L'erreur s'accumule.
 
