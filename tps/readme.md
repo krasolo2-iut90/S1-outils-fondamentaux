@@ -108,7 +108,66 @@ changée, résout exactement ce qui échouait complètement trente lignes plus h
 Le seul changement est le type des nombres. Ça rend concret quelque chose qui
 restait abstrait depuis le TP1.
 
-## Usage d'un assistant
+## TP5 - Cryptographie : chiffrement affine
+
+Arrêté avant l'exercice 7.1 (indice de coïncidence non fait).
+
+### Ce que je retiens
+
+- **La clé invalide qui ne prévient pas** : j'ai testé `a = 4`, `b = 7` comme le
+  demandait l'énoncé. Le chiffrement s'exécute sans la moindre erreur, mais le
+  message chiffré contient beaucoup moins de lettres distinctes que le clair. Deux
+  lettres différentes deviennent la même : l'information est détruite, et rien dans
+  le programme ne le signale. C'est le point du TP qui m'a le plus marquée — une
+  erreur mathématique invisible à l'exécution.
+- **Pourquoi 12 valeurs de `a`** : je pensais qu'il suffisait que `a` soit impair.
+  Le 13 est impair et pourtant inutilisable, parce que 26 = 2 × 13. Ce sont les
+  facteurs premiers de 26 qui comptent, pas la parité.
+- **Le `% n` final de l'inverse modulaire** : Euclide étendu renvoie parfois un
+  coefficient négatif. `inverse_modulaire(3, 26)` donnait `-8` ; avec le modulo on
+  obtient 18, et `3 × 18 = 54 = 2 × 26 + 1`. Sans cette ligne, tous mes tests
+  d'assertion échouaient.
+- **Force brute vs fréquences** : 312 clés, ça se calcule instantanément, mais ça
+  reste 312 lignes à lire à la main. En supposant que la lettre la plus fréquente
+  du chiffré vient du E, on tombe à 12 candidats. Le calcul coûte la même chose,
+  c'est le tri qui change tout. J'ai filtré grossièrement (présence de A, E, U)
+  plutôt que d'écrire un score automatique.
+
+### Usage d'un assistant
+
+Utilisé pour vérifier la formule de déchiffrement et comprendre pourquoi certaines
+clés étaient invalides. J'ai exécuté les deux attaques moi-même et vérifié que
+`dechiffrer(chiffrer(m, 5, 8), 5, 8)` redonne bien `m`.
+
+## TP6 - Géométrie du plan
+
+Tous les exercices sont faits, y compris le lancer de rayon et Monte-Carlo.
+
+### Ce que je retiens
+
+- **Le déterminant comme outil central** : le signe du déterminant dit tout :
+  de quel côté d'une droite se trouve un point, si un polygone tourne à gauche
+  ou à droite, et même l'aire orientée. C'est l'outil le plus polyvalent du TP.
+- **Le cas limite du lancer de rayon** : je n'ai pas traité les cas ou le point
+  est exactement sur un sommet ou un côté. La condition `(si_y > py) != (sj_y > py)`
+  exclut le sommet le plus haut pour éviter le double comptage, mais si le point
+  est exactement à la hauteur d'un sommet, le résultat peut être ambigu. C'est
+  un problème classique en géométrie algorithmique.
+- **Monte-Carlo vs formule du lacet** : la formule du lacet donne l'aire exacte
+  (à l'erreur flottante près), tandis que Monte-Carlo donne une approximation qui
+  varie d'un run à l'autre. Pour la maison, Monte-Carlo avec 200k points donne
+  ~4.0 ± 0.02, ce qui est cohérent.
+- **Les cas non traités dans `se_coupent`** : j'ai renvoyé `False` si trois points
+  sont alignés, comme demandé. En pratique, il faudrait tester si le point
+  d'intersection est bien entre les extrémités des segments, mais les tests
+  fournis ne couvrent pas ces cas.
+
+### Usage d'un assistant
+
+Pour vérifier la formule du lacet et comprendre la condition du lancer de rayon.
+J'ai exécuté tous les tests et vérifié les résultats avec des exemples connus.
+
+## Usage d'un assistant (global)
 
 Autorisé et utilisé. Je m'en suis servi pour écrire une partie du code, relire
 mes erreurs de syntaxe et comprendre certaines récursions (notamment Euclide
