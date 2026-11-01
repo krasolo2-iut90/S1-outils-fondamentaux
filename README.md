@@ -51,3 +51,4 @@ J'ai utilisé un assistant IA pour écrire une partie du code et corriger des er
 ## Fichiers
 - `main.py` : le programme
 - `results.txt` : la sortie brute du programme
+- `tps` : les TPs
